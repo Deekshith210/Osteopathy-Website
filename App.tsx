@@ -14,7 +14,6 @@ import FloatingCTA from './components/FloatingCTA';
 function App() {
   return (
     <div className="min-h-screen bg-brand-peach selection:bg-brand-peachDark selection:text-brand-dark">
-      <h1>Osteopathy Website Deployed</h1>
       <Navbar />
       <main>
         <Hero />
