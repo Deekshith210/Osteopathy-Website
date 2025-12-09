@@ -14,9 +14,11 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: ls -la dist
-      - run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_BHUVAN_OSTEOPATH }}" > service-account.json
+      - name: Create service account file
+        run: |
+          echo "$FIREBASE_SA" > service-account.json
         env:
-          FIREBASE_SERVICE_ACCOUNT_BHUVAN_OSTEOPATH: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BHUVAN_OSTEOPATH }}
+          FIREBASE_SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BHUVAN_OSTEOPATH }}
       - run: npx firebase-tools deploy --only hosting --project bhuvan-osteopath
         env:
           GOOGLE_APPLICATION_CREDENTIALS: service-account.json
