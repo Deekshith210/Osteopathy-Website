@@ -14,9 +14,9 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: ls -la dist
-      - uses: FirebaseExtended/action-hosting-deploy@v0.1.0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BHUVAN_OSTEOPATH }}'
-          channelId: live
-          projectId: bhuvan-osteopath
+      - run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_BHUVAN_OSTEOPATH }}" > service-account.json
+        env:
+          FIREBASE_SERVICE_ACCOUNT_BHUVAN_OSTEOPATH: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BHUVAN_OSTEOPATH }}
+      - run: npx firebase-tools deploy --only hosting --project bhuvan-osteopath
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: service-account.json
